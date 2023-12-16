@@ -28,17 +28,17 @@ def solve(grid, x, y, dir):
 	stk = [(x, y, dir)]
 	n = len(grid)
 	m = len(grid[0])
-	marked = [[False for _ in range(m)] for _ in range(n)]
+	marked = [[0 for _ in range(m)] for _ in range(n)]
 	while stk:
 		x, y, dir = stk.pop()
-		marked[x][y] = True
+		marked[x][y] = 1
 		for dx, dy in MP[grid[x][y]][dir]:
 			nx, ny = x + dx, y + dy
 			if 0 <= nx < n and 0 <= ny < m and (nx, ny, (dx, dy)) not in visited:
 				stk.append((nx, ny, (dx, dy)))
 				visited.add((nx, ny, (dx, dy)))
 	
-	return sum([1 if val else 0 for row in marked for val in row])
+	return sum([x for row in marked for x in row])
 
 def part1():
 	grid = []
